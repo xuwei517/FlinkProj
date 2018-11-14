@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="DataClean" />
+        <module name="DataCleanScala" />
+        <module name="DataReport" />
+        <module name="DataReportScala" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="1.8">
+      <module name="DataClean" target="1.8" />
+      <module name="DataCleanScala" target="1.8" />
+      <module name="DataReport" target="1.8" />
+      <module name="DataReportScala" target="1.8" />
+      <module name="FlinkProj" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

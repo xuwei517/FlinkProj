@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/DataClean/DataClean.iml" filepath="$PROJECT_DIR$/DataClean/DataClean.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DataCleanScala/DataCleanScala.iml" filepath="$PROJECT_DIR$/DataCleanScala/DataCleanScala.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DataReport/DataReport.iml" filepath="$PROJECT_DIR$/DataReport/DataReport.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DataReportScala/DataReportScala.iml" filepath="$PROJECT_DIR$/DataReportScala/DataReportScala.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FlinkProj.iml" filepath="$PROJECT_DIR$/FlinkProj.iml" />
+    </modules>
+  </component>
+</project>
