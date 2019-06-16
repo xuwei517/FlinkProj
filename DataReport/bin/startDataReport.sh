@@ -1,5 +1,6 @@
 #!/bin/bash
 flink run -m yarn-cluster \
+-d \
 -yqu default \
 -ynm DataReportJob \
 -yn 2 \

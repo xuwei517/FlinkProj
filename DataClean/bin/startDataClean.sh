@@ -1,6 +1,7 @@
 #!/bin/bash
 # 需要在/etc/profile中配置FLINK_HOME
 flink run -m yarn-cluster \
+-d \
 -yqu default \
 -ynm DataCleanJob \
 -yn 2 \
