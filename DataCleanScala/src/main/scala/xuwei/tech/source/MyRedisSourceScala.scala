@@ -17,26 +17,27 @@ class MyRedisSourceScala extends SourceFunction[mutable.Map[String,String]]{
 
   val SLEEP_MILLION = 60000
 
+  //存储所有国家和大区的对应关系
+  var keyValueMap = mutable.Map[String,String]()
+
   var isRunning = true
   var jedis: Jedis = _
 
   override def run(ctx: SourceContext[mutable.Map[String, String]]) = {
     this.jedis = new Jedis("hadoop110", 6379)
-    //隐式转换，把java的hashmap转为scala的map
     import scala.collection.JavaConversions.mapAsScalaMap
+    //隐式转换，把java的hashmap转为scala的map
 
-    //存储所有国家和大区的对应关系
-    var keyValueMap = mutable.Map[String,String]()
+
     while (isRunning){
       try{
         keyValueMap.clear()
-        keyValueMap = jedis.hgetAll("areas")
-
-        for( key <- keyValueMap.keys.toList){
-          val value = keyValueMap.get(key).get
+        val map:mutable.Map[String,String] = jedis.hgetAll("areas")
+        for( key <- map.keys.toList){
+          val value = map.get(key).get
           val splits = value.split(",")
           for(split <- splits){
-            keyValueMap += (key -> split)
+            keyValueMap += (split -> key)
           }
         }
 

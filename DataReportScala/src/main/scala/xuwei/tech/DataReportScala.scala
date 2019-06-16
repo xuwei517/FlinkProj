@@ -108,32 +108,32 @@ object DataReportScala {
     }).keyBy(1, 2)
       .window(TumblingEventTimeWindows.of(Time.seconds(30)))
       .allowedLateness(Time.seconds(30)) //允许迟到30s
-      .sideOutputLateData(outputTag)
+      .sideOutputLateData(outputTag)//收集迟到太久的数据
       .apply(new WindowFunction[Tuple3[Long, String, String], Tuple4[String, String, String, Long], Tuple, TimeWindow] {
-        override def apply(key: Tuple, window: TimeWindow, input: Iterable[(Long, String, String)], out: Collector[Tuple4[String, String, String, Long]]) = {
-          //获取分组字段信息
-          val type1 = key.getField(0).toString
-          val area = key.getField(1).toString
-          val it = input.iterator
-          //存储时间，为了获取最后一条数据的时间
-          val arrBuf = ArrayBuffer[Long]()
-          var count = 0
-          while (it.hasNext) {
-            val next = it.next
-            arrBuf.append(next._1)
-            count += 1
-          }
-          println(Thread.currentThread.getId + ",window触发了，数据条数：" + count)
-          //排序
-          val arr = arrBuf.toArray
-          Sorting.quickSort(arr)
+            override def apply(key: Tuple, window: TimeWindow, input: Iterable[(Long, String, String)], out: Collector[Tuple4[String, String, String, Long]]) = {
+              //获取分组字段信息
+              val type1 = key.getField(0).toString
+              val area = key.getField(1).toString
+              val it = input.iterator
+              //存储时间，为了获取最后一条数据的时间
+              val arrBuf = ArrayBuffer[Long]()
+              var count = 0
+              while (it.hasNext) {
+                val next = it.next
+                arrBuf.append(next._1)
+                count += 1
+              }
+              println(Thread.currentThread.getId + ",window触发了，数据条数：" + count)
+              //排序
+              val arr = arrBuf.toArray
+              Sorting.quickSort(arr)
 
-          val sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-          val time = sdf.format(new Date(arr.last))
-          //组装结果
-          val res = new Tuple4[String, String, String, Long](time, type1, area, count)
-          out.collect(res)
-        }
+              val sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+              val time = sdf.format(new Date(arr.last))
+              //组装结果
+              val res = new Tuple4[String, String, String, Long](time, type1, area, count)
+              out.collect(res)
+            }
       })
 
     //获取迟到太久的数据

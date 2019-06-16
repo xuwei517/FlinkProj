@@ -65,7 +65,7 @@ object DataCleanScala {
         val dt = jsonObject.getString("dt")
         val countryCode = jsonObject.getString("countryCode")
         //获取大区
-        val area = allMap.get(countryCode)
+        val area = allMap.get(countryCode).getOrElse("other")
 
         val jsonArray = jsonObject.getJSONArray("data")
         for (i <- 0 to jsonArray.size()-1) {
